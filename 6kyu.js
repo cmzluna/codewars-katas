@@ -138,29 +138,46 @@ function sumConsecutives(s) {
 // Organise duplicate numbers in list 
 // https://www.codewars.com/kata/5884b6550785f7c58f000047
 
-
+//                      RE VEER !!!
 function group(arr) {
- 
+
     return arr.reduce((acum, cur) => {
         cur = String(cur);  // changed to String format in order to be able to use indexOf
 
-       let indexPrevOccurrence = acum.indexOf(cur);
+        let indexPrevOccurrence = acum.indexOf(cur);
 
-       if(acum.indexOf(/cur+/) != -1) {  // search for previous occurrence of current number in array
-           acum[indexPrevOccurrence] = acum[indexPrevOccurrence].concat(',' + cur);
-       } else {
-           acum.push(String(cur));
-       }
-
-       return acum;
+        if (indexPrevOccurrence != -1 && indexOfNestedItem(acum, cur) != -1) {  // search for previous occurrence of current number in array
+            
+         if(indexOfNestedItem(acum, cur) != -1) {
+            acum[indexOfNestedItem(acum, cur)] = acum[indexOfNestedItem(acum, cur)].concat(',' + cur)  // NOT WORKING!!!! *****
+         } else {
+            acum[indexPrevOccurrence] = acum[indexPrevOccurrence].concat(',' + cur);
+         }   
+            
+        } else {
+            acum.push(String(cur));
+        }
+        return acum;
 
     }, []).map(el => {
-        if(el.includes(',')) {
-            return el.split(',').map(elem => Number(elem)); 
+        if (el.includes(',')) {
+            return el.split(',').map(elem => Number(elem));
         } else {
             return el = [el].map(elem => Number(elem));
         }
     });
+
+    function indexOfNestedItem(array, item) {
+        let index;
+    
+        array.forEach(el => {
+            if (el.includes(item)) {
+                index = array.indexOf(el);
+            }
+        });
+        return index;
+    }
+    
 }
 
 console.log(group([3, 2, 6, 2, 1, 3]), [[3, 3], [2, 2], [6], [1]]);
@@ -177,18 +194,20 @@ console.log(group([13,12,11,19,13,16,12,15,19,12]))
 
 [['13'],['12','12'],['11']]
 
+
+// FUNCTION that searches in nested array:
+// indexOfNestedItem([['13'],['12','12'],['11']], ['11'])  ===>  returns 2
 function indexOfNestedItem(array, item) {
-    return array.forEach(el => {
-        if (el.forEach(elem => {
-            if (elem === item) {
-                return true;
-            }
-        })) {
-            return array.indexOf(el);
+    let index;
+
+    array.forEach(el => {
+        if (el[0].includes(item)) {
+            index = array.indexOf(el);
         }
-        return false;
-    })
+    });
+    return index;
 }
+
 
 /* How to use  Object.entries ?
 
@@ -248,3 +267,33 @@ const findMissingLetter = (array) => {
     const start = alphabet.indexOf(array[0]);
     return alphabet.slice(start, start + array.length).find(el => !array.includes(el));
   };
+
+
+  // Twisted Sum
+  // https://www.codewars.com/kata/527e4141bb2ea5ea4f00072f
+ 
+function twistedSum(n) {
+    // create array with numbers from 1 to n
+    let arr = [];
+
+    for (let i = 1; i <= n; i++) {
+        if (i >= 10) {
+            arr.push(splitToDigit(i).reduce((acu, cur) => acu + cur,0));
+        } else {
+            arr.push(i);
+        }
+  
+        }
+    
+    function splitToDigit(n){
+        return (n + '').split('').map((i) => { return Number(i); })
+      }
+
+      return arr.reduce((acu, cur) => acu + cur,0);
+}
+
+// Split number to its Digits
+function splitToDigit(n){
+    return (n + '').split('').map((i) => { return Number(i); })
+  }
+ 
