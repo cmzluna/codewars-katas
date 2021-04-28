@@ -138,84 +138,85 @@ function sumConsecutives(s) {
 // Organise duplicate numbers in list 
 // https://www.codewars.com/kata/5884b6550785f7c58f000047
 
+
 function group(arr) {
  
-     return arr.reduce((acum, cur) => {
+    return arr.reduce((acum, cur) => {
+        cur = String(cur);  // changed to String format in order to be able to use indexOf
 
-        if(acum.indexOf(cur) !== -1) {
-            // push current in acum.indexOf([2]) 
-            acum[acum.indexOf(cur)] = String(cur);   // indexOf no funciona con objetos  
+       let indexPrevOccurrence = acum.indexOf(cur);
+
+       if(acum.indexOf(/cur+/) != -1) {  // search for previous occurrence of current number in array
+           acum[indexPrevOccurrence] = acum[indexPrevOccurrence].concat(',' + cur);
+       } else {
+           acum.push(String(cur));
+       }
+
+       return acum;
+
+    }, []).map(el => {
+        if(el.includes(',')) {
+            return el.split(',').map(elem => Number(elem)); 
         } else {
-            acum.push(cur);
+            return el = [el].map(elem => Number(elem));
         }
-        return acum;
-
-     }, []);
+    });
 }
-// esta misma idea se podria si convirtiese todos los elementos a STRING <<????
 
-str2.concat(', ', str1))
+console.log(group([3, 2, 6, 2, 1, 3]), [[3, 3], [2, 2], [6], [1]]);
+
+console.log(group([10,15,14,18,18,13,11,16,10,18])) 
+console.log(group([13,12,11,19,13,16,12,15,19,12]))
+
+// cuando esta al final el current repetido,  no funciona.
+
+[13,12,11,12,12]
+
+[['13'],['12,12'],['11']]   // falta: como ver si '12' esta incluido en array anidado y como encontrar el indice del array que lo incluye.
+
+
+[['13'],['12','12'],['11']]
+
+function indexOfNestedItem(array, item) {
+    return array.forEach(el => {
+        if (el.forEach(elem => {
+            if (elem === item) {
+                return true;
+            }
+        })) {
+            return array.indexOf(el);
+        }
+        return false;
+    })
+}
+
+/* How to use  Object.entries ?
+
+const obj = { foo: 'bar', baz: 42 };
+console.log(Object.entries(obj)); // [ ['foo', 'bar'], ['baz', 42] ]
+*/
+
+console.log(group([3, 2, 6, 2, 1, 3]), [[3, 3], [2, 2], [6], [1]]);
+
+console.log(group([10,15,14,18,18,13,11,16,10,18])) 
+console.log(group([13,12,11,19,13,16,12,15,19,12]))
+
+// cuando esta al final el current repetido,  no funciona.
+// esta misma idea se podria si convirtiese todos los elementos a STRING <<????
+ 
 
 
 // [3] === [3]   da FALSE ! un objeto es distinto a otro aunque tenga los mismos datos.
 // ver esta solucion
 // https://stackoverflow.com/questions/39720959/get-index-of-parent-object-in-nested-object-array
-
-[3, 2, 6, 2, 1, 3]
-
-function group(arr) {
-
-
-
-}
-
-
+ 
+// changing to String to be able to do a search:
 var tw = [[3, 0], [11, 0], [3, 14], [11, 14]];
 
 if (tw.filter(function (v) { return String(v) === String([3, 10]) })[0]) 
 {
     // ...
 }
-
-
-
-
-
-
-
-
-console.log(group([3, 2, 6, 2, 1, 3]));
-console.log(group([3, 2, 6, 2]));
-
- 
-
-    let item_list = [1, 2, 3, 4, 5, 5, 5, 7, 8, 2, 3, 4, 4, 4, 4, 4];
-
-let duplicate = item_list.reduce((acc, currentValue, index, array) => {
-    if (array.indexOf(currentValue) != index && !acc.includes(currentValue)) {
-        acc.push(currentValue);
-    }
-    return acc;
-}, []);
-
-console.log('Duplicate items are ' + duplicate.join(','));
-
-function group(arr) {
-
-    arr.reduce(function (accumulator, currentValue) {
-        if (accumulator.indexOf(currentValue) === -1) {
-            accumulator.push(currentValue)
-        } else {
-            // are duplicates
-
-        }
-    }
-    
-        ,[]);
-}
-
-
-[[3, 3], [2, 2], [6], [1]]
 
 
 // FIND MISSING LETTER
@@ -240,3 +241,10 @@ function findMissingLetter(array) {
     }).join('');
      
 }
+
+// another solution
+const findMissingLetter = (array) => {
+    const alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+    const start = alphabet.indexOf(array[0]);
+    return alphabet.slice(start, start + array.length).find(el => !array.includes(el));
+  };
