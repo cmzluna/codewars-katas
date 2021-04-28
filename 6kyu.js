@@ -297,3 +297,27 @@ function splitToDigit(n){
     return (n + '').split('').map((i) => { return Number(i); })
   }
  
+  // Other solutions:
+  function twistedSum(n) {
+    return [...Array(n + 1).keys()].reduce((a, b) => a + [...""+b].reduce((x, y) => x + +y, 0), 0);
+  }
+  // rest parameters:   https://scotch.io/bar-talk/javascripts-three-dots-spread-vs-rest-operators543 
+ 
+  const twistedSum = n => [...Array(n + 1).keys()].reduce((s, x, i) => {
+    return s + [...`${i}`].reduce((a, b) => a + Number(b), 0);
+  }, 0);
+
+  function twistedSum(n,sum=0) {
+    for(let i = 1; i <= n; i++)
+      sum += (i < 10)?i:i.toString().split("").reduce((a,b)=>parseInt(a)+parseInt(b))
+    return sum
+  }
+
+
+
+function twistedSum(n) {
+    return [...Array(n + 1).keys()]
+}
+
+
+
