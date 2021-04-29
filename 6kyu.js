@@ -321,3 +321,70 @@ function twistedSum(n) {
 
 
 
+// Calculate String Rotation
+// https://www.codewars.com/kata/5596f6e9529e9ab6fb000014
+
+
+
+rotate('fatigue','tiguefa')
+
+second.indexOf(first[0]);  // steps moved forward
+
+'fatigue','tiguefa'
+7-2 : 5
+
+0 -> 5      length: 7 
+1 -> 6
+2 -> 0 // it starts here!
+3 -> 1
+4 -> 2 
+5 -> 3
+6 -> 4
+
+"eecoff", "coffee"    length: 6
+6-2: 4
+
+0 -> 4
+1 -> 5
+2 -> 0 // it starts here!
+3 -> 1
+4 -> 2
+5 -> 3
+
+"isn't", "'tisn"    length: 5
+
+5-3: 2
+
+3 -> 0 // it starts here!
+/ -> 1
+/ -> 2
+/ -> 3
+/ -> 4
+
+
+
+function shiftedDiff(first, second) {
+    if (first === second) {
+        return 0;
+    } else if (isValid(first, second)) {
+        return first.length - first.indexOf(second[0]);
+    } else {
+        return -1;
+    }
+
+    function isValid(first, second) {
+        let begin = second.slice(second.indexOf(first[0]));
+        let end = second.slice(0, second.indexOf(first[0]));
+
+        return (begin + end === first) ? true : false;
+    }
+}
+
+// other solution
+function shiftedDiff(first, second) {
+    if (first.length != second.length) return -1
+    return (second + second).indexOf(first)
+  }
+
+// other solution
+var shiftedDiff = (a, b) => a.length == b.length ? (b + b).indexOf(a) : -1;
