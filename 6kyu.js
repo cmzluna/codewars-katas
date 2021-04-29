@@ -388,3 +388,52 @@ function shiftedDiff(first, second) {
 
 // other solution
 var shiftedDiff = (a, b) => a.length == b.length ? (b + b).indexOf(a) : -1;
+
+
+// Word a10n (abbreviation)
+// https://www.codewars.com/kata/5375f921003bf62192000746/train/javascript
+
+// any other character like a space or hyphen (eg. "elephant-ride") will split up a series of letters into two words (eg. "elephant" and "ride").
+// use RegEx 
+
+function abbreviate(string) {
+
+    let filteredStr = string.replace(/\w+/g, function(match) {
+        if (match.length>3) {   // word needs to be >= 4 to be changed 
+            let middle = match.slice(1,match.length - 1).length + ''; // (force cohersion)
+            return match[0] + middle + match[match.length-1];
+        } else {
+            return match;
+        }
+      
+    });
+ 
+    return filteredStr;   
+}
+console.log(abbreviate("internationalization"), "i18n");
+console.log(abbreviate("accessibility"), "a11y");
+console.log(abbreviate("Accessibility"), "A11y");
+console.log(abbreviate("elephant-ride"), "e6t-r2e");
+
+console.log(abbreviate("You need, need not want, to complete this code-wars mission"), "You n2d, n2d not w2t, to c6e t2s c2e-w2s m5n");
+
+// Word a10n (abbreviation) :  other solution
+var find = /[a-z]{4,}/gi;
+function replace(match) { return match[0] + (match.length - 2) + match[match.length - 1]; }
+
+function abbreviate(string) {
+    return string.replace(find, replace);
+}
+
+// Word a10n (abbreviation) :  other solution
+function abbreviate(string) {
+    return string.replace(/\w{4,}/g, function (word) {
+        return word[0] + (word.length - 2) + word.slice(-1);
+    });
+}
+
+// Word a10n (abbreviation) :  other solution
+function abbreviate(string) {
+    return string.replace(/\B\w{2,}\B/g, match => match.length);
+}
+// https://medium.com/factory-mind/regex-tutorial-a-simple-cheatsheet-by-examples-649dc1c3f285
