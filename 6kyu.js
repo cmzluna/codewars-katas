@@ -437,3 +437,31 @@ function abbreviate(string) {
     return string.replace(/\B\w{2,}\B/g, match => match.length);
 }
 // https://medium.com/factory-mind/regex-tutorial-a-simple-cheatsheet-by-examples-649dc1c3f285
+
+// USE  regex101.com !!!
+
+
+//    \b
+//    one side is a word character and the other side is not a word character
+
+//    \B
+//    if we want to find a pattern fully surrounded by word characters
+/\Bephan\B/.test('elephandt');   // TRUE
+/\Bphandt\B/.test('elephandt'); // FALSE
+
+// Common array elements
+// https://www.codewars.com/kata/5a6225e5d8e145b540000127
+
+function common(a,b,c){
+    let bcopy = b.slice();
+    let ccopy =  c.slice();
+
+    a.reduce((acum, cur) => {
+        if (b.includes(cur) && c.includes(cur)) {
+            bcopy.slice(bcopy.indexOf(cur),1);
+            ccopy.slice(ccopy.indexOf(cur),1);
+            
+            return acum + cur
+        }
+    },0)
+   }
