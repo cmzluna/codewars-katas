@@ -531,3 +531,34 @@ const solution = pairs =>
     Object.entries(pairs)
         .map(([key, value]) => `${key} = ${value}`)
         .join(',');
+
+
+/*
+
+Validate Credit Card Number
+https://www.codewars.com/kata/5418a1dd6d8216e18a0012b2
+
+*/
+
+function validate(n) {
+    if (n > 0 && n.toString().length <= 16) {
+      let arr = n.toString().split("").map(Number);
+  
+      // var arrayOfNumbers = arrayOfStrings.map(Number);
+  
+      let i = arr.length;
+      while (i >= 0) {
+        i = i - 2;
+        arr[i] = arr[i] * 2;
+      }
+      console.log(arr);
+  
+      let sum = arr
+        .map((el) => (el > 9 ? el - 9 : el))
+        .reduce((acum, el) => acum + el);
+      return sum % 10 === 0 ? true : false;
+    } else {
+      return false;
+    }
+  }
+  
