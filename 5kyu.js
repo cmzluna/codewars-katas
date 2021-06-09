@@ -35,7 +35,7 @@ are a subsequence of the array:
 
 //returns the longest subsequence common to the passed in sequences.
 
-LCS("132535365", "123456789")[ // "12356"
+LCS("132535365", "123456789") // "12356"
   /////////////////////////////////////////////
   // solution from https://javascript.plainenglish.io/a-deep-dive-of-one-of-the-algorithms-ive-solved-this-week-534f13e8f1e
   /*
@@ -58,7 +58,7 @@ function isValidSubsequence(array, sequence) {
     }
   }
 
-  if (out.toString() == sequence.toString()) {
+  if (j === sequence.length) {
     return true;
   } else {
     return false;
@@ -68,3 +68,10 @@ function isValidSubsequence(array, sequence) {
 isValidSubsequence([1, 2, 4, 5], [1, 3, 2, 5]); //false
 isValidSubsequence([1, 2, 4, 5], [1, 4, 5]); /// true
 isValidSubsequence([1, 2, 4, 5], [1, 4]); // true
+
+
+array = [1, 1, 6, 1] and sequence = [1, 1, 1, 6]
+// Algoexpert.io
+
+1,1,1
+1,4,5

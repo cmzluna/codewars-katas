@@ -80,3 +80,27 @@ var paintLetterboxes = function(start, end) {
 
 
   [10, 11]
+
+  /*
+
+  Sort array by string length
+
+https://www.codewars.com/kata/57ea5b0b75ae11d1e800006c/train/javascript
+
+Return an array containing the same strings, ordered from shortest to longest
+  */
+
+function sortByLength (array) {
+   return  array
+            .map(el => [el.length, el])
+            .sort(function(a,b) {
+                return a[0]-b[0];
+            }).map(el => el[1]);
+};
+
+sortByLength(["Telescopes", "Glasses", "Eyes", "Monocles"])
+
+// other solutions
+function sortByLength (array) {
+    return array.sort((a,b) => a.length - b.length);
+};
