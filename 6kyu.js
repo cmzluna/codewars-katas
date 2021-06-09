@@ -465,3 +465,69 @@ function common(a,b,c){
         }
     },0)
    }
+
+
+
+//   https://www.codewars.com/kata/525d50d2037b7acd6e000534
+Array.prototype.square = function() {
+     return this.map(el => el*el);
+}
+
+Array.prototype.square = function() {
+    let out = [];
+
+    for(let i=0; i<this.length; i++) {
+        let element = this[i] ** 2;
+        out.push(element);
+    }
+    return out;
+}
+ 
+Array.prototype.cube = function() {
+    let out = [];
+
+    for(let i=0; i<this.length; i++) {
+        let element = this[i] ** 3;
+        out.push(element);
+    }
+    return out;
+} 
+
+Array.prototype.average = function() {
+    let out = 0;
+
+    if(this.length === 0) return NaN;
+
+    for(let i=0; i<this.length; i++) {
+        out += this[i];
+    }
+    return out/this.length;
+}
+ 
+Array.prototype.sum = function() {
+    return this.reduce((acum, el) => acum+el)
+}
+ 
+Array.prototype.even = function() {
+    return this.filter(el => !(el%2));
+} 
+
+Array.prototype.odd = function() {
+    return this.filter(el => el%2);
+}
+ 
+
+https://www.codewars.com/kata/51c7d8268a35b6b8b40002f2
+
+function solution(pairs){
+  let keys = Object.keys(pairs);
+  
+  return keys.map(el => `${el} = ${pairs[el]}`).join(',');
+}
+solution({a: 1, b: '2'})
+
+// other solution
+const solution = pairs =>
+    Object.entries(pairs)
+        .map(([key, value]) => `${key} = ${value}`)
+        .join(',');
