@@ -12,3 +12,59 @@ a.b.c.d
 
 */
 function ipsBetween(ip1, ip2) {}
+
+// TODO
+
+// Longest Common Subsequence
+// https://www.codewars.com/kata/longest-common-subsequence/train/javascript
+
+function LCS(x, y) {}
+//returns the longest subsequence common to the passed in sequences.
+//The terms of a subsequence need not be consecutive terms of the original sequence.
+
+/*
+A subsequence of an array is a set of numbers that aren’t necessarily adjacent in the array but that are in the same order as they appear in the array. For example these numbers
+
+[2, 3, 5]
+
+are a subsequence of the array:
+
+[1, 2, 3, 4, 5]
+
+*/
+
+//returns the longest subsequence common to the passed in sequences.
+
+LCS("132535365", "123456789")[ // "12356"
+  /////////////////////////////////////////////
+  // solution from https://javascript.plainenglish.io/a-deep-dive-of-one-of-the-algorithms-ive-solved-this-week-534f13e8f1e
+  /*
+The prompt or problem statement: Given two non-empty arrays of integers, write a function that determines whether the second array is a subsequence of the first one.
+*/
+
+  (1, 2, 4, 5)
+][(2, 5)];
+
+2 === 2;
+
+function isValidSubsequence(array, sequence) {
+  let j = 0; // represents index of sequence array
+  let out = [];
+
+  for (i = 0; i < array.length; i++) {
+    if (array[i] === sequence[j]) {
+      out.push(sequence[j]);
+      j++;
+    }
+  }
+
+  if (out.toString() == sequence.toString()) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+isValidSubsequence([1, 2, 4, 5], [1, 3, 2, 5]); //false
+isValidSubsequence([1, 2, 4, 5], [1, 4, 5]); /// true
+isValidSubsequence([1, 2, 4, 5], [1, 4]); // true

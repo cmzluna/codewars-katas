@@ -543,9 +543,8 @@ https://www.codewars.com/kata/5418a1dd6d8216e18a0012b2
 function validate(n) {
     if (n > 0 && n.toString().length <= 16) {
       let arr = n.toString().split("").map(Number);
-  
-      // var arrayOfNumbers = arrayOfStrings.map(Number);
-  
+       // way to typecast to a numbered array 
+   
       let i = arr.length;
       while (i >= 0) {
         i = i - 2;
@@ -562,3 +561,45 @@ function validate(n) {
     }
   }
   
+  // other solutions
+  function validate(n) {
+    n = n.toString().split('').map(Number).reverse();
+    return n.reduce(function (sum, digit, index) {
+      if (index & 1) digit <<= 1;
+      if (digit > 9) digit -= 9;
+      return sum + digit;
+    }, 0) % 10 == 0;
+  }
+
+  // Additional Functions to convert between binary and decimal notation:
+  const b2d = x => parseInt(x,2)     // binary to decimal
+  const d2b = x => x.toString(2)     // decimal to binary
+  
+  0b0001 << 2 // 4  JS converts back to decimal notation 
+d2b(0b0001 << 2)    // '100'
+
+ 
+  
+  /* see BITWISE operators (&)
+  //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_AND
+  https://medium.com/@parkerjmed/practical-bit-manipulation-in-javascript-bfd9ef6d6c30
+
+conversions:
+  (9).toString(2)  // "1001" 
+    parseInt('1001', 2)  // 9
+
+0b0001   // 1
+
+  Left Shift Operation in JS Bitwise Operator: Left Shifting one position is equal to multiplying the number with 2. It means,
+
+a << 1 = (9 * 2) = 18
+
+
+
+https://www.tutorialgateway.org/javascript-bitwise-operators/
+  - the left-most bit in a 32 bit integer represents whether a number is negative or positive, the rest of it is the number in binary
+
+ LEFT SHIFT ASSIGNMENT
+ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Left_shift_assignment
+
+*/
