@@ -104,3 +104,23 @@ sortByLength(["Telescopes", "Glasses", "Eyes", "Monocles"])
 function sortByLength (array) {
     return array.sort((a,b) => a.length - b.length);
 };
+
+
+//https://www.codewars.com/kata/v-a-p-o-r-c-o-d-e/train/javascript
+function vaporcode(string) {
+  return string.toUpperCase().split(' ').map(el => el.split('').join('  ')).join('  ')
+}
+
+function vaporcode(string) {
+    return string.toUpperCase().split('').filter(el => el != ' ').join('  ')
+}
+
+// other solutions
+function vaporcode(string) {
+    return string.toUpperCase().replace(/ /g,'').split('').join('  ')
+  }
+
+//
+function vaporcode(string) {
+    return Array.from(string.replace(/\s+/g, "").toUpperCase()).join("  ")
+  }
