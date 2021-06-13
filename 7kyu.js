@@ -124,3 +124,18 @@ function vaporcode(string) {
 function vaporcode(string) {
     return Array.from(string.replace(/\s+/g, "").toUpperCase()).join("  ")
   }
+
+  // https://www.codewars.com/kata/sort-the-gift-code/train/javascript
+  // Sort the Gift Code
+  function sortGiftCode(code){
+    return code.
+            split('')
+            .sort()
+            .join('');
+  }
+
+  // other solutions
+  function sortGiftCode(code){
+    return [...code].sort().join``
+  }
+  
