@@ -603,3 +603,12 @@ https://www.tutorialgateway.org/javascript-bitwise-operators/
  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Left_shift_assignment
 
 */
+
+
+// Tic-Tac-Toe-like table Generator
+// https://www.codewars.com/kata/tic-tac-toe-like-table-generator/train/javascript
+
+function displayBoard(board, width){
+    //your code here
+  }
+  
