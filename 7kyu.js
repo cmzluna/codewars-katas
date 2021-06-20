@@ -181,6 +181,9 @@ function gap(num) {
     return longest.length
   }
 
+
+const gap = n => n.toString(2).split('1').slice(0, -1).sort().pop().length;
+
 // using positive lookahead: 
   '10111000000000011'.match(/0+(?=1)/g)
   '10111000000000011'. match(/10+(?=1)/g)  
@@ -191,5 +194,23 @@ Lookahead and lookbehind, collectively called “lookaround”,
 
 
 q(?=u) matches a q that is followed by a u, without making the u part of the match. The positive lookahead construct is a pair of parentheses, with the opening parenthesis followed by a question mark and an equals sign.
+
+Negative lookahead: 
+q(?!u)
+
+a q not  folllowed by a u
+
+
+
+Example:
+
 */
-  const gap = n => n.toString(2).split('1').slice(0, -1).sort().pop().length;
+const people = `
+- Bob (vegetarian)
+- Billa (vegan)
+- Francis
+- Elli (vegetarian)
+- Fred (vegan)
+`;
+const regex = /-\s(\w+?)\s(?=\(vegan\))/g;
+let result = regex.exec(people);
