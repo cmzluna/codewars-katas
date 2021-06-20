@@ -139,3 +139,50 @@ function vaporcode(string) {
     return [...code].sort().join``
   }
   
+
+// Find the longest gap!
+//  https://www.codewars.com/kata/find-the-longest-gap/train/javascript
+//  returns the length of its longest binary gap.
+
+/// NOT WORKING!!!!!! ////////////////
+function gap(num) {
+    const binaryNum = num.toString(2);
+    let count = 0; 
+    
+    for(let i =0 ; i<binaryNum.length; i++) {
+
+        if(binaryNum[i]==='1') {
+            let j = 0;
+            while(binaryNum[i+1] === '0' && i+1<binaryNum.length) {
+                j++;
+                i++;
+            }
+            i++;
+            if ( j >= count) {
+                count = j;
+            }
+        }
+    }
+    return count;
+}
+
+// OTHER SOLUTIONS:
+//return  result = num.match(/10+1/g);
+// https://www.regular-expressions.info/repeat.html
+
+const gap = num => (num.toString(2).match(/10+(?=1)/g) || [' ']).sort().pop().length - 1;
+
+//
+
+function gap(num) {
+    binary  = num.toString(2)
+    zeros   = binary.match(/0+(?=1)/g) || ['']
+    longest = zeros.sort().pop() 
+    return longest.length
+  }
+
+
+  '10111000000000011'.match(/0+(?=1)/g)
+  '10111000000000011'.match(/0*(!?1)/g)
+ 
+  const gap = n => n.toString(2).split('1').slice(0, -1).sort().pop().length;

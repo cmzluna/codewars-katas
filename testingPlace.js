@@ -1,22 +1,61 @@
-function LCS(array, sequence) {
-  let j = 0; // represents index of sequence array
-  let out = [];
-  let z = 0; // represents stop for Loop if not equal with sequence[j]
-
-  for (i = 0; i < array.length; i++) {
-    if (array[i] === sequence[j]) {
-      out.push(sequence[j]);
-      j++;
-      z = j;
-    } else if (i === array.length && arr[i] !== sequence[j]) {
-    }
-  }
-
-  return out.join("");
+function displayBoard(board, width) {
+  //your code here
 }
 
-console.log(("a", "b"), "");
-console.log(LCS("abcdef", "abc"), "abc");
-console.log(LCS("132535365", "123456789"), "12356");
-
-"132535365", "123456789";
+console.log(displayBoard(["O", "X", "X", "O"], 2), " O | X \n-------\n X | O ");
+console.log(
+  displayBoard(["O", "X", " ", " ", "X", " ", "X", "O", " "], 3),
+  " O | X |   \n-----------\n   | X |   \n-----------\n X | O |   "
+);
+console.log(
+  displayBoard(["O", "X", " ", " ", "X", " ", "X", "O", " ", "O"], 5),
+  " O | X |   |   | X \n-------------------\n   | X | O |   | O "
+);
+console.log(
+  displayBoard(["O", "X", " ", " ", "X", " ", "X", "O", " ", "O"], 2),
+  " O | X \n-------\n   |   \n-------\n X |   \n-------\n X | O \n-------\n   | O "
+);
+console.log(
+  displayBoard(
+    [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "1",
+    ],
+    6
+  ),
+  " 1 | 2 | 3 | 4 | 5 | 1 \n-----------------------\n 2 | 3 | 4 | 5 | 1 | 2 \n-----------------------\n 3 | 4 | 5 | 1 | 2 | 3 \n-----------------------\n 4 | 5 | 1 | 2 | 3 | 4 \n-----------------------\n 5 | 1 | 2 | 3 | 4 | 5 \n-----------------------\n 1 | 2 | 3 | 4 | 5 | 1 "
+);
