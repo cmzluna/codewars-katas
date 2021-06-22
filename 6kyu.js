@@ -658,7 +658,15 @@ var WordDictionary = function () {
     }
     return false;
   };
-  /*            HOW TO PUT VARIABLE INSIDE A REGEX
+
+  
+/*//// LEARNING NOTES: ////////
+
+
+The dot matches a single character, without caring what that character is. The only exception are line break characters. 
+
+
+HOW TO PUT VARIABLE INSIDE A REGEX
   // https://stackoverflow.com/questions/4029109/javascript-regex-how-to-put-a-variable-inside-a-regular-expression
   
   The literal notation results in compilation of the regular expression when the expression is evaluated.
@@ -675,17 +683,61 @@ var WordDictionary = function () {
   let re = new RegExp('ab+c', 'i')
   
   Taken from   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp
-  */
-
-  /cod...rs/.test('codewars')
-
-
-/*//// LEARNING NOTES: ////////
-The dot matches a single character, without caring what that character is. The only exception are line break characters. 
+  
+  
+  
 
 */
+ // using arrays
+class WordDictionary {
+    constructor() {
+      this.words = [];
+    }
+    addWord(word) {
+      this.words.push(word);
+    }
+    search(pattern) {
+      const re = new RegExp(`^${pattern}$`);
+      return this.words.some(w => re.test(w));
+    }
+  }
+
+   // using line breaks
+  var WordDictionary = function () {
+    this.str = '\n';
+    return this;
+  };
+  WordDictionary.prototype.addWord = function (word) {
+    this.str += word + '\n';
+  };
+  WordDictionary.prototype.search = function (word) {
+    const pattern = new RegExp(`\n${word}\n`, "g");
+    return (pattern).test(this.str);
+  };
 
 
+  class WordDictionary {
+    constructor() {
+      this.words = {};
+    }
+    addWord(word) {
+      const size = word.length;
+      if (!this.words.hasOwnProperty(size)) {
+        this.words[size] = new Set();
+      }
+      this.words[size].add(word);
+    }
+    search(word) {
+      const size = word.length;
+      if (!this.words.hasOwnProperty(size)) {
+        return false;
+      }
+      const pattern = new RegExp(`^${word.replace(/\./g, '\.')}$`);
+      return [...this.words[size]]
+        .some(x=>pattern.test(x));
+    }
+  }
+  
 /*
 Password validator
 
