@@ -618,3 +618,98 @@ function displayBoard(board, width){
  console.log(displayBoard(["O", "X", " ", " ", "X", " ", "X", "O", " ", "O"],5)," O | X |   |   | X \n-------------------\n   | X | O |   | O ");
  console.log(displayBoard(["O", "X", " ", " ", "X", " ", "X", "O", " ", "O"],2)," O | X \n-------\n   |   \n-------\n X |   \n-------\n X | O \n-------\n   | O ");
  console.log(displayBoard(["1", "2", "3", "4", "5", "1", "2", "3", "4", "5", "1", "2", "3", "4", "5", "1", "2", "3", "4", "5", "1", "2", "3", "4", "5", "1", "2", "3", "4", "5", "1", "2", "3", "4", "5", "1"],6)," 1 | 2 | 3 | 4 | 5 | 1 \n-----------------------\n 2 | 3 | 4 | 5 | 1 | 2 \n-----------------------\n 3 | 4 | 5 | 1 | 2 | 3 \n-----------------------\n 4 | 5 | 1 | 2 | 3 | 4 \n-----------------------\n 5 | 1 | 2 | 3 | 4 | 5 \n-----------------------\n 1 | 2 | 3 | 4 | 5 | 1 ");
+
+
+/*
+                        UNCOMPLETE!
+
+ https://www.codewars.com/collections/regex-katas
+
+
+ https://www.codewars.com/kata/5631ac5139795b281d00007d
+
+ Design a data structure that supports the following two operations:
+
+    addWord (or add_word) which adds a word,
+    search which searches a literal word or a regular expression string containing lowercase letters "a-z" or "." where "." can represent any letter
+
+You may assume that all given words contain only lowercase letters.
+
+ */
+var WordDictionary = function () {
+    this.count = 0;
+    this.items = {};
+  };
+  
+  WordDictionary.prototype.addWord = function (word) {
+    this.items[this.count] = word;
+    this.count++;
+  };
+  
+  WordDictionary.prototype.search = function (word) {
+    for (const prop in this.items) {
+      //literal
+      console.log(this.items[prop]);
+      const regex = new RegExp(`^${word}$`);
+  
+      if (regex.test(this.items[prop])) {
+        return true;
+      }
+    }
+    return false;
+  };
+  /*            HOW TO PUT VARIABLE INSIDE A REGEX
+  // https://stackoverflow.com/questions/4029109/javascript-regex-how-to-put-a-variable-inside-a-regular-expression
+  
+  The literal notation results in compilation of the regular expression when the expression is evaluated.
+  
+  Ex:
+     let re = /ab+c/i; // literal notation
+  
+  Use literal notation when the regular expression will remain constant. For example, if you use literal notation to construct a regular expression used in a loop, the regular expression won't be recompiled on each iteration.
+  
+  The constructor of the regular expression object—for example, new RegExp('ab+c')—results in runtime compilation of the regular expression. Use the constructor function when you know the regular expression pattern will be changing, or you don't know the pattern and obtain it from another source, such as user input.
+  
+  Ex: 
+  
+  let re = new RegExp('ab+c', 'i')
+  
+  Taken from   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp
+  */
+
+  /cod...rs/.test('codewars')
+
+
+/*//// LEARNING NOTES: ////////
+The dot matches a single character, without caring what that character is. The only exception are line break characters. 
+
+*/
+
+
+/*
+Password validator
+
+
+    There needs to be at least 1 uppercase letter.
+    There needs to be at least 1 lowercase letter.
+    There needs to be at least 1 number.
+    The password needs to be at least 8 characters long.
+
+
+*/
+
+function password(str) {
+    return /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{8,}$/.test(str);
+}
+
+// other solutions:
+function password(str) {
+    return str.length >= 8 &&
+           /[a-z]/.test(str) &&
+           /[A-Z]/.test(str) &&
+           /\d/.test(str);
+}
+
+function password(str) {
+    return ['[A-Z]','[a-z]','\\d','.{8,}'].every(e => new RegExp(e).test(str));
+}
