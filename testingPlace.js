@@ -18,12 +18,4 @@ function lazyChain(arg) {
   return chain;
 }
 
-console.log(
-  lazyChain("hello").invoke("toUpperCase").invoke("split", "").value()
-);
-console.log(
-  lazyChain([1, 2, 3])
-    .invoke("map", (x) => x * x)
-    .invoke("reverse")
-    .value()
-);
+lazyChain("hello").invoke("toUpperCase").invoke("split", "");
