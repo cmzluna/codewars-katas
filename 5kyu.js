@@ -75,3 +75,27 @@ array = [1, 1, 6, 1] and sequence = [1, 1, 1, 6]
 
 1,1,1
 1,4,5
+
+// Lazy Chain
+//https://www.codewars.com/kata/lazy-chain/train/javascript
+
+function lazyChain(arg) {
+  let finalValue = arg;
+
+  let chain = {
+    invoke,
+    value
+  };
+
+  function value() {
+      return finalValue;
+  };
+
+   function invoke(funcName, ...args) {
+     finalValue = finalValue[funcName](...args);
+     return chain;
+  };
+
+  return chain;
+}
+ 
