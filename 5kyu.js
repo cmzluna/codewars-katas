@@ -1,4 +1,11 @@
 /*
+MOST DIFFICULT ONES:
+
+lazyChain()
+
+*/ 
+
+/*
 https://www.codewars.com/kata/526989a41034285187000de4
 
 Implement a function that receives two IPv4 addresses, and returns the number of addresses between them (including the first one, excluding the last one).
@@ -93,9 +100,63 @@ function lazyChain(arg) {
 
    function invoke(funcName, ...args) {
      finalValue = finalValue[funcName](...args);
+     console.log(finalValue);
      return chain;
   };
 
   return chain;
 }
- 
+
+// other 
+function lazyChain(arg, invocations = []) {
+  return {
+    invoke(funcName, ...args) {
+      return lazyChain(arg, [...invocations, { funcName, args }]);
+    },
+    value() {
+      return invocations.reduce((finalValue, invocation) => {
+        return finalValue[invocation.funcName](...invocation.args);
+      }, arg);
+    },
+  };
+}
+
+//
+function lazyChain(arg) {
+  return {
+    queue: [],
+    
+    invoke: function(fn, ...args){
+      this.queue.push([fn, args]);
+      console.log(this);
+      return this;
+    },
+    value: function (){
+       this.queue.forEach(([fn,args]) => arg = arg[fn].apply(arg,args));
+       return arg;
+    }
+  }
+}
+
+
+lazyChain("hello").invoke("toUpperCase").invoke("split", "");
+
+queue =  [ [upperCase], [split, '']]
+{
+  queue: [],
+  
+  invoke: function (fn, ...args){
+    this.queue.push([fn, args]);
+    return this;
+  },
+  value: function (){
+     this.queue.forEach(([fn,args]) => arg = arg[fn].apply(arg,args));
+     return arg;
+  }
+}
+
+//
+const lazyChain = (x, calls = []) => ({
+  invoke: (fn, ...rest) => lazyChain(x, [...calls, (cur) => cur[fn](...rest)]),
+  value: () => calls.reduce((acc, fn) => fn(acc), x)
+});
