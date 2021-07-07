@@ -899,15 +899,15 @@ function createMemoizedIsSubPalindrome() {
     return result;
   };
 }
-// isSubPalindrome(num) --> graba en cache
+// isSubPalindrome(num) --> stores en cache
 
 const isSubPalindrome = createMemoizedIsSubPalindrome();
 
 function createMemoizedPalindrome() {
-  const cache = {};
+  const cache = {};  // resets ????
   return (num, palindromes = []) => {
     let result;
-    if (num in cache) return cache[num];
+    if (num in cache) return cache[num]; //
     if (typeof num !== 'number') {
       result = errorMessages.notValid;
     } else if (num < 0) {
@@ -933,8 +933,79 @@ function createMemoizedPalindrome() {
       return errorMessages.notFound;
     }
     return [...new Set(palindromes.sort((a, b) => a - b))];
+    // using Set to remove duplicates 
   };
 }
 
 const palindrome = createMemoizedPalindrome();
+  
+
+ // Other solution
+ function palindrome(num) {
+  if (!Number.isInteger(num) || num<0) return "Not valid";
+  const isPalindrome = num => String(num) === [...String(num)].reverse().join('');
+  const res = [];
  
+  for (let i=0; i<=String(num).length; i++) {
+    for (let j=i+2; j<=String(num).length; j++) {
+      let p = parseInt((''+num).substring(i,j));
+      if (p>9 && isPalindrome(p)) res.push(p);
+    }
+  }
+  
+  return res.length ? [...new Set(res)].sort((a,b) => a-b) : 'No palindromes found';
+ }
+
+
+ // Other solution
+ function palindrome(num) {
+  if (num<0||typeof num!='number') return 'Not valid'; else num+=''; 
+  for (var r=[], i=0;i<num.length;i++)
+     for (var j=i+2;j<1+num.length;j++) if ([...s=num.slice(i,j)].reverse().join('')==s) r.push(+s);
+  if (!r[0]) return 'No palindromes found'; else r.sort((a,b)=>a-b);
+  return r.filter((a,i)=>a!=0&&(a+'')[(a+'').length-1]!='0'&&r.indexOf(a)==i)
+}
+
+ // Other solution
+function palindrome(num) { 
+
+  if (num !== +num || num < 0)
+    return 'Not valid';
+
+  let res = new Set()
+  ,   str = `${num}`
+  , match = null
+  , shift = 0;
+
+  let spread = (start, end) => {
+
+    while (start >= 0 && end < str.length && str[start] === str[end]) {
+
+      if (str[start] !== '0')
+        res.add(str.slice(start, end + 1));
+      
+      start--;
+      end++;
+
+    }
+
+  }
+
+  let _str = str.slice();
+
+  while (match = /(.)(\1+|.\1)/.exec(_str)) {
+
+    spread(shift + match.index, shift + match.index + match[0].length - 1);
+    _str = _str.slice(match.index + 1);
+    shift += match.index + 1;
+
+  }
+
+  if (!res.size)
+    return 'No palindromes found';
+
+  return [...res].map(Number).sort((a, b) => a - b);
+
+
+}
+////////////////
