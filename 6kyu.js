@@ -969,7 +969,7 @@ const palindrome = createMemoizedPalindrome();
  // Other solution
 function palindrome(num) { 
 
-  if (num !== +num || num < 0)
+  if (num !== +num || num < 0)  // It is a unary "+" operator which yields a numeric expression. 
     return 'Not valid';
 
   let res = new Set()
@@ -978,7 +978,6 @@ function palindrome(num) {
   , shift = 0;
 
   let spread = (start, end) => {
-
     while (start >= 0 && end < str.length && str[start] === str[end]) {
 
       if (str[start] !== '0')
@@ -986,19 +985,15 @@ function palindrome(num) {
       
       start--;
       end++;
-
     }
-
   }
 
   let _str = str.slice();
 
   while (match = /(.)(\1+|.\1)/.exec(_str)) {
-
     spread(shift + match.index, shift + match.index + match[0].length - 1);
     _str = _str.slice(match.index + 1);
     shift += match.index + 1;
-
   }
 
   if (!res.size)
@@ -1006,6 +1001,9 @@ function palindrome(num) {
 
   return [...res].map(Number).sort((a, b) => a - b);
 
-
 }
+
+palindrome(22122)
+
 ////////////////
+22122

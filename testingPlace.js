@@ -1,54 +1,34 @@
-const errorMessages = {
-  notValid: "Not valid",
-  notFound: "No palindromes found",
-};
+function interleave(...args) {
+  console.log(args);
 
-function createMemoizedIsSubPalindrome() {
-  const cache = {};
-  return (number) => {
-    // number is the property in cache
-    if (number in cache) return cache[number]; // returns a boolean
-    const strNum = number.toString();
-    const result = strNum.split("").reverse().join("") == strNum; // compares number with reversed one
-    cache[number] = result; // saves boolean
-    return result;
-  };
-}
-// isSubPalindrome(num) --> graba en cache
+  let res = [];
 
-const isSubPalindrome = createMemoizedIsSubPalindrome();
-
-function createMemoizedPalindrome() {
-  const cache = {}; // resets ????
-  return (num, palindromes = []) => {
-    let result;
-    if (num in cache) return cache[num]; //
-    if (typeof num !== "number") {
-      result = errorMessages.notValid;
-    } else if (num < 0) {
-      result = errorMessages.notValid;
-    } else if (num < 10) {
-      result = errorMessages.notFound;
-    }
-
-    if (result) {
-      cache[num] = result;
-      return result;
-    }
-
-    if (isSubPalindrome(num)) {
-      palindromes.push(num);
-    }
-
-    palindrome(+num.toString().slice(1), palindromes);
-    palindrome(+num.toString().slice(0, -1), palindromes);
-
-    if (!palindromes.length) {
-      cache[num] = errorMessages.notFound;
-      return errorMessages.notFound;
-    }
-    return [...new Set(palindromes.sort((a, b) => a - b))];
-  };
+  while (!args.every((array) => array.length === 0)) {
+    args.forEach((el) => {
+      if (!el[0] && el[0] !== 0) {
+        res.push(null);
+      } else {
+        res.push(el[0]);
+      }
+      el.splice(0, 1);
+    });
+  }
+  return res;
 }
 
-const palindrome = createMemoizedPalindrome();
+console.log(interleave([1, 2, 3], [4, 5]), [1, 4, 2, 5, 3, null]);
+console.log(
+  interleave([1, 2, 3], [4, 5, 6], [7, 8, 9]),
+  [1, 4, 7, 2, 5, 8, 3, 6, 9]
+);
+console.log(interleave([1, 2, 3], ["c", "d", "e"]), [1, "c", 2, "d", 3, "e"]);
+console.log(interleave([]), []);
+
+console.log(interleave([4, 5], [1, 2, 3]))[
+  // problems in this one
+
+  (["X", "l", 2, "M"],
+  ["j", "7", "p", "X", "m", 0, "O", 8],
+  ["o", "L", 3, "g", "a", "a", 4, "i", "j", 0],
+  ["q", "v", "q", "h", 5, "v", "M"])
+];

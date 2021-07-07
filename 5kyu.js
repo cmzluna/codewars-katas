@@ -160,3 +160,25 @@ const lazyChain = (x, calls = []) => ({
   invoke: (fn, ...rest) => lazyChain(x, [...calls, (cur) => cur[fn](...rest)]),
   value: () => calls.reduce((acc, fn) => fn(acc), x)
 });
+
+
+// Interleaving Arrays
+// https://www.codewars.com/kata/523d2e964680d1f749000135
+
+function interleave(...args) {
+  console.log(args);
+
+  let res = [];
+
+  while (!args.every((array) => array.length === 0)) {
+    args.forEach((el) => {
+      if (!el[0] && el[0] !== 0) {
+        res.push(null);
+      } else {
+        res.push(el[0]);
+      }
+      el.splice(0, 1);
+    });
+  }
+  return res;
+}
