@@ -1007,3 +1007,32 @@ palindrome(22122)
 
 ////////////////
 22122
+
+///                                Casino chips
+//             https://www.codewars.com/kata/5e0b72d2d772160011133654
+const compare = (a, b) => b - a;
+
+function solve(arr){
+  // a place to store the number of days
+    // initialized to zero
+  let numDays = 0;
+
+  arr.sort(compare);
+  // while there are at least 2 stacks with at least 1 chip
+  while(arr[0] > 0 && arr[1] > 0) {
+    // increment number of days
+    numDays++;
+    // decrement the 2 highest stacks
+    arr[0]--;
+    arr[1]--;
+    arr.sort(compare); //needed when reaching minimum numbers in the 2 first indexes
+  }
+
+  return numDays;
+}
+
+// Solution from code wars
+function solve([a,b,c]) {
+  return Math.min(a+b,a+c,b+c,Math.floor((a+b+c)/2));
+}
+

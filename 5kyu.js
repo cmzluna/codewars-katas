@@ -228,3 +228,18 @@ arr.test = 'bad';
 for (let i in arr) {
   console.log(arr[i]);
 }
+
+// Find the safest places in town
+// https://www.codewars.com/kata/5dd82b7cd3d6c100109cb4ed
+
+
+// If agent coordinates are outside of the map, they are simply not considered.
+// There are no duplicate agents on the same square.
+
+function advice(agents, n) {
+
+}
+
+agents = [[0, 0], [1, 5], [5, 1]]
+// index length <= n-1
+ 
