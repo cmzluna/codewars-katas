@@ -182,3 +182,49 @@ function interleave(...args) {
   }
   return res;
 }
+
+// OTHER SOLUTIONS
+
+const interleave = (...a) => {
+  let interleaved = []
+  const longest = a.reduce((a, b) => (a.length > b.length ? a : b));
+
+  for (let i in longest) {
+    a.forEach(elem => elem[i] === undefined ? interleaved.push(null) : interleaved.push(elem[i]));
+  }
+  return interleaved;
+};
+
+//
+interleave=(...a)=>require('lodash').zip(...a).reduce((b,c)=>b.concat(c),[]).map(e=>typeof e==="undefined" ? null : e)
+
+//
+function interleave(...arrs) {
+  const maxLength = Math.max(...arrs.map((arr) => arr.length));
+  const result = [];
+  
+  for (let i = 0; i < maxLength; i++) {
+    for (const arr of arrs) {
+      result.push(i < arr.length ? arr[i] : null);
+    }
+  }
+  
+  return result;
+} 
+
+/*/////////////////////////////////////// Read about For vs forEach() vs for/in vs for/of  
+///// https://thecodebarbarian.com/for-vs-for-each-vs-for-in-vs-for-of-in-javascript
+ //////////////////////////////////////// //////////////////////////////////////// //// 
+
+FOR / IN will actually print out "bad":
+--> FOR / IN  is the only array method that doesn't ignore the non-numeric property
+
+*/
+
+const arr = ['a', 'b', 'c'];
+arr.test = 'bad';
+
+// Prints "a, b, c, bad"
+for (let i in arr) {
+  console.log(arr[i]);
+}
