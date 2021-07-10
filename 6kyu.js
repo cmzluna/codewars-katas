@@ -1036,3 +1036,33 @@ function solve([a,b,c]) {
   return Math.min(a+b,a+c,b+c,Math.floor((a+b+c)/2));
 }
 
+// Array.diff 
+// https://www.codewars.com/kata/523f5d21c841566fde000009
+
+
+// (it's an implementation of the difference method from a Set data structure)
+function arrayDiff(arr1, arr2) {
+  const differenceSet = [];
+
+  arr1.forEach((value) => {
+    if (!arr2.includes(value)) {
+      differenceSet.push(value);
+    }
+  });
+
+  return differenceSet;
+}
+ 
+// Other solutions from codewars
+function array_diff(a, b) {
+  return a.filter(e => !b.includes(e));
+}
+
+function array_diff(a, b) {
+  return a.filter(function(x) { return b.indexOf(x) == -1; });
+}
+
+function array_diff(a, b) {
+  b = new Set(b)
+  return a.filter(v => !b.has(v))
+}
